@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <title>Backbone Car App</title>
+  </head>
+  <body>
+    <div class="container">
+    <h1>Car App</h1>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Year</th>
+      </tr>
+      <tr>
+        <td><input class="form-control brand-input"></td>
+        <td><input class="form-control model-input"></td>
+        <td><input class="form-control year-input"></td>
+        <td><button class="btn btn-primary add-car">Create</td>
+      </tr>
+      <tr>
+        <th>S.No</th>
+        <th>Brand & Model</th>
+        <th>Year of Manufacturing</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody class="cars-list"></tbody>
+  </table>
+</div>
+
+<script type="text/template" class="cars-list-template">
+  <td><span class="serial"></span></td>
+  <td><span class="model"><%= brand %> <%= model %></span></td>
+  <td><span class="year"><%= year %></span></td>
+  <td><button class="btn btn-warning edit-car">Edit</button>
+  <button class="btn btn-danger delete-car">Delete</button>
+    <button class="btn btn-success update-car" style="display:none">Update</button>
+    <button class="btn btn-danger cancel" style="display:none">Cancel</button></td>
+
+</script>
+
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
+    <script src="scripts.js">
+
+    </script>
+    </script>
+  </body>
+</html>
