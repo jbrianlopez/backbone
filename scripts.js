@@ -39,13 +39,15 @@ var CarView = Backbone.View.extend({
   },
   events: {
     'click .edit-car': 'edit',
-    'click .update-car': 'update'
+    'click .update-car': 'update',
+    'click .cancel': 'cancel',
+    'click .delete-car': 'delete'
   },
   edit: function() {
     $('.edit-car').hide();
     $('.delete-car').hide();
-    $('.update-car').show();
-    $('.cancel').show();
+    this.$('.update-car').show();
+    this.$('.cancel').show();
 
     var serial = this.$('.serial').html()
     var model = this.$('.model').html()
@@ -61,6 +63,12 @@ var CarView = Backbone.View.extend({
     this.model.set('model', $('.model-update').val())
     this.model.set('year', $('.year-update').val())
     this.model.set('brand', $('.brand-update').val())
+  },
+  cancel: function() {
+    carsView.render()
+  },
+  delete: function() {
+    this.model.destroy()
   },
   // update: function() {
   //   this.model.set({'serial':this.$('.serial-update').val(),
@@ -87,6 +95,7 @@ var CarsView = Backbone.View.extend({
         self.render();
       }, 400)
     }, this)
+    this.model.on('remove', this.render, this)
   },
   render: function() {
     var self = this;
