@@ -1,7 +1,9 @@
 // MODEL
+// var index = this.collection.indexOf(Cars);
 
 var Car = Backbone.Model.extend({
   defaults: {
+    // serial: '',
     brand: '',
     model: '',
     year: ''
@@ -13,21 +15,21 @@ var Car = Backbone.Model.extend({
 var Cars = Backbone.Collection.extend({});
 
 // instantiate two Cars
-// var car1 = new Car({
-//   brand: 'Ford',
-//   model: 'Figo',
-//   year: '2016'
-// })
-//
-// var car2 = new Car({
-//   brand: 'VW',
-//   model: 'Polo',
-//   year: '2014'
-// })
+var car1 = new Car({
+  brand: 'Ford',
+  model: 'Figo',
+  year: '2016'
+})
+
+var car2 = new Car({
+  brand: 'VW',
+  model: 'Polo',
+  year: '2014'
+})
 
 // instantiate a collection
 
-var cars = new Cars()
+var cars = new Cars([car1, car2])
 
 // VIEWS
 // For one car
@@ -112,16 +114,22 @@ var carsView = new CarsView();
 
 $(document).ready(function() {
   $('.add-car').on('click', function() {
+    // var i = 0;
+    // i++;
+    console.log(i)
     var car = new Car ({
+      // serial: $('.serial').val(i),
       brand: $('.brand-input').val(),
       model: $('.model-input').val(),
       year: $('.year-input').val()
     })
+    // $('.serial').val(i);
     $('.brand-input').val('');
     $('.model-input').val('');
     $('.year-input').val('');
     console.log(car.toJSON());
     cars.add(car);
+      // i++;
   })
 })
 // var carsView = new CarsView();
