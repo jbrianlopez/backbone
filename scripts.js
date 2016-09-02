@@ -3,7 +3,7 @@
 
 var Car = Backbone.Model.extend({
   defaults: {
-    // serial: '',
+    serial: '',
     brand: '',
     model: '',
     year: ''
@@ -16,20 +16,36 @@ var Cars = Backbone.Collection.extend({});
 
 // instantiate two Cars
 var car1 = new Car({
+  serial: '1',
   brand: 'Ford',
   model: 'Figo',
   year: '2016'
 })
 
 var car2 = new Car({
+  serial: '2',
   brand: 'VW',
   model: 'Polo',
   year: '2014'
 })
 
+var car3 = new Car({
+  serial: '3',
+  brand: 'Toyota',
+  model: 'Corolla',
+  year: '2015'
+})
+
+var car4 = new Car({
+  serial: '4',
+  brand: 'Hyundai',
+  model: 'i20',
+  year: '2016'
+})
+
 // instantiate a collection
 
-var cars = new Cars([car1, car2])
+var cars = new Cars([car1, car2, car3, car4])
 
 // VIEWS
 // For one car
@@ -60,30 +76,30 @@ var CarView = Backbone.View.extend({
     this.$('.model').html('<input type="text" class="form-control model-update" value="' + model + '">')
     this.$('.year').html('<input type="text" class="form-control year-update" value="' + year + '">')
   },
-  update: function() {
-    this.model.set('serial', $('.serial-update').val())
-    this.model.set('model', $('.model-update').val())
-    this.model.set('year', $('.year-update').val())
-    this.model.set('brand', $('.brand-update').val())
-  },
+  // update: function() {
+  //   this.model.set('serial', $('.serial-update').val())
+  //   this.model.set('model', $('.model-update').val())
+  //   this.model.set('year', $('.year-update').val())
+  //   this.model.set('brand', $('.brand-update').val())
+  // },
   cancel: function() {
     carsView.render()
   },
   delete: function() {
     this.model.destroy()
   },
-  // update: function() {
-  //   this.model.set({'serial':this.$('.serial-update').val(),
-	// 		'model':this.$('.model-update').val(),
-	// 		'year':this.$('.year-update').val()});
-  // },
+  update: function() {
+    this.model.set({'serial':this.$('.serial-update').val(),
+			'model':this.$('.model-update').val(),
+      'brand':this.$('.brand-update').val(),
+			'year':this.$('.year-update').val()});
+  },
   render: function() {
     this.$el.html(this.template(this.model.toJSON()
     ))
     return this;
   }
 })
-
 
 // VIEWS for all cars
 var CarsView = Backbone.View.extend({
@@ -93,9 +109,7 @@ var CarsView = Backbone.View.extend({
     var self = this;
     this.model.on('add', this.render, this);
     this.model.on('change', function() {
-      setTimeout(function(){
         self.render();
-      }, 400)
     }, this)
     this.model.on('remove', this.render, this)
   },
@@ -113,23 +127,23 @@ var carsView = new CarsView();
 
 
 $(document).ready(function() {
+  carsView.render().el
+  var i = 5
   $('.add-car').on('click', function() {
-    // var i = 0;
-    // i++;
+
     console.log(i)
     var car = new Car ({
-      // serial: $('.serial').val(i),
+      serial: i++,
       brand: $('.brand-input').val(),
       model: $('.model-input').val(),
       year: $('.year-input').val()
     })
-    // $('.serial').val(i);
+
     $('.brand-input').val('');
     $('.model-input').val('');
     $('.year-input').val('');
     console.log(car.toJSON());
     cars.add(car);
-      // i++;
+
   })
 })
-// var carsView = new CarsView();
