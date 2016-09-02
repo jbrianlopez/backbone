@@ -38,8 +38,8 @@ var CarView = Backbone.View.extend({
     this.template = _.template($('.cars-list-template').html())
   },
   events: {
-    'click.edit-car': 'edit',
-    'click .update-car': 'update',
+    'click .edit-car': 'edit',
+    'click .update-car': 'update'
   },
   edit: function() {
     $('.edit-car').hide();
@@ -47,9 +47,10 @@ var CarView = Backbone.View.extend({
     $('.update-car').show();
     $('.cancel').show();
 
-    var serial = this.$('.serial').html();
-    var model = this.$('.model').html();
-    var year = this.$('.year').html();
+    var serial = this.$('.serial').html()
+    var model = this.$('.model').html()
+    var year = this.$('.year').html()
+    var brand = this.$('.brand').html()
 
     this.$('.serial').html('<input type="text" class="form-control serial-update" value="' + serial + '">')
     this.$('.model').html('<input type="text" class="form-control model-update" value="' + model + '">')
@@ -59,7 +60,13 @@ var CarView = Backbone.View.extend({
     this.model.set('serial', $('.serial-update').val())
     this.model.set('model', $('.model-update').val())
     this.model.set('year', $('.year-update').val())
+    this.model.set('brand', $('.brand-update').val())
   },
+  // update: function() {
+  //   this.model.set({'serial':this.$('.serial-update').val(),
+	// 		'model':this.$('.model-update').val(),
+	// 		'year':this.$('.year-update').val()});
+  // },
   render: function() {
     this.$el.html(this.template(this.model.toJSON()
     ))
@@ -78,7 +85,7 @@ var CarsView = Backbone.View.extend({
     this.model.on('change', function() {
       setTimeout(function(){
         self.render();
-      }, 40)
+      }, 400)
     }, this)
   },
   render: function() {
